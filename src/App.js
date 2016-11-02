@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
+import Grid from './components/grid';
 
 export default class App extends Component {
 	
 	static defaultProps = {
-		x: 50,
-		y: 50,
-		r: 20,
-		fill: 'red'
+		w: 800,
+		h: 600,
+		fill: "green"
 	}
-	
+
 	render() {
 		return (
-			<svg xmlns="http://www.w3.org/2000/svg">
-				<circle cx={this.props.x} cy={this.props.y} r={this.props.r} fill={this.props.fill} />
-			</svg>
-		);
+			<Grid {...this.props} />
+		)
 	}
 }
