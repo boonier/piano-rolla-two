@@ -1,0 +1,12 @@
+
+.note {
+	transition: fill .1s; 
+	fill: green;
+	display: flex;
+}
+
+.note:hover {
+	fill: lighten(green, 4%);
+	cursor: row-resize;
+	cursor: move;
+}
