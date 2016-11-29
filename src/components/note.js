@@ -1,33 +1,34 @@
 import React from 'react';
-import './note.scss'
+import './note.scss';
+import {noteEdgeSize} from '../lib/constants';
 
 export default class Note extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			x: props.x,
-			y: props.y,
-			currX: 0,
-			currY: 0,
-			currentMtx: []
-		}
-		this.setSelectedNote = this.props.setSelectedNote;
+			overType: 'note'
+		};
+		this.notes = this.props.notes;
 	};
 
 	render() {
+
 		return <rect 
-				className="note"
-				x={this.state.x} 
-				y={this.state.y} 
+				className={this.state.overType}
+				x={this.props.x} 
+				y={this.props.y}
 				width={this.props.width} 
 				height={this.props.height} 
-				fill={this.props.fill} 
-				style={this.props.style} 
-				rx={this.props.radius} 
+				style={this.props.style}
+				rx={this.props.radius}
 				ry={this.props.radius}
+				transform={this.state.currentMatrix}
 				onMouseUp={this.onMouseUp}
-				onMouseDown={this.onMouseDown}
+				onMouseDown={this.props.onMouseDown}
+				onMouseOver={this.onMouseOver}
+				onMouseOut={this.onMouseOut}
+				onMouseMove={this.onMouseMove}
 				/>
 	};
 
@@ -43,15 +44,30 @@ export default class Note extends React.Component {
 		radius: 2
 	};
 
+	onMouseOver = (e) => {};
 	onMouseUp = (e) => {};
 
-	onMouseDown = (e) => {
-		this.setSelectedNote(e)
-		console.log(e.clientX)
+	onMouseOut = (e) => {
+		this.setNoteClass();
 	};
 
-	selectElement = (e) => {
-		console.log(this.props.selectedNote);
+	onMouseMove = (e) => {
+		let currEl = e.target.getBoundingClientRect();	
+		if (e.clientX <= currEl.right && e.clientX >= (currEl.right - noteEdgeSize)) { 
+			this.setNoteClass('right');
+		} else if (e.clientX >= currEl.left && e.clientX <= (currEl.left + noteEdgeSize)) { 
+			this.setNoteClass('left');
+		} else {
+			this.setNoteClass();
+		}
+	};
+
+	setNoteClass = (c) => {
+		let newClass = ['note'];
+		if (c) newClass.push(c);
+		this.setState({
+			overType: newClass.join(' ')
+		});
 	};
 
 }

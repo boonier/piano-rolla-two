@@ -1,17 +1,24 @@
+
+// ControlBar
+//// Transport
+//// OscConnect
+// Grid
+// Keyboard
+// Timeline
+
 import React, { Component } from 'react';
 import Grid from './components/grid';
 
 export default class App extends Component {
-	
-	static defaultProps = {
-		w: 800,
-		h: 600,
-		fill: "green"
-	}
+
+	constructor(props) {
+		super(props);
+	};
 
 	render() {
 		return (
-			<Grid {...this.props} />
+			<Grid w={this.props.w} h={this.props.h} patternLength={64} />
 		)
-	}
+	};
+
 }

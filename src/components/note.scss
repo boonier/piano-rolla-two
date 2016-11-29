@@ -1,12 +1,19 @@
+$green: #26af26;
 
 .note {
 	transition: fill .1s; 
-	fill: green;
+	fill: $green;
 	display: flex;
+	// cursor: row-resize;
+	cursor: move;
+	&.left {
+		cursor: w-resize;	
+	}
+	&.right {
+		cursor: e-resize;	
+	}
 }
 
 .note:hover {
-	fill: lighten(green, 4%);
-	cursor: row-resize;
-	cursor: move;
+	fill: lighten($green, 4%);
 }

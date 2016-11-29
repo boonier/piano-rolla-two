@@ -24,7 +24,12 @@ module.exports = {
         include: path.join(__dirname, 'src')
       }, {
         test: /\.scss$/, 
-        loaders: ['style', 'css', 'postcss-loader','sass']
+        loaders: [
+          'style', 
+          'css', 
+          'postcss-loader?sourceMap-inline',
+          'sass'
+        ]
       }
 
       // ,{
