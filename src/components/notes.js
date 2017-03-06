@@ -5,11 +5,11 @@ export default class Notes extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.notes = props.state.notes;
 		this.noteInt = props.w / props.patternLength;
 	};
 
 	render() {
-		// console.log(this.renderNotes(this.props));
 		return (
 			<g className={this.props.className}>
 				{this.renderNotes(this.props)}
@@ -18,7 +18,7 @@ export default class Notes extends React.Component {
 	};
 
 	renderNotes(props) {
-		const notes = this.props.notes.map((note, idx) => {
+		const notes = this.notes.map((note, idx) => {
 			return <Note 
 					key={'n'+idx}
 					id={idx}
@@ -26,15 +26,16 @@ export default class Notes extends React.Component {
 					y={note.y} 
 					width={note.dur * this.noteInt} 
 					height={10}
-					onMouseDown={()=>this.handleClick(idx)}
-					{...this.props} 
+					onMouseDown={ () => this.handleClick(idx)}
+					{...this.props}
 					/>
 		});
 		return notes;
 	};
 
-	handleClick(i) {
-		console.log(i);
+	handleClick(idx) {
+		this.props.notesHandler(idx);
 	}
+
 
 }
